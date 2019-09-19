@@ -8,9 +8,11 @@ const rl = readline.createInterface({
 });
 
 function lowerCase(word) {
-  word = word.toLowerCase();
+  string.toLowerCase();
   return word;
 }
+
+lowerCase();
 
 function rockPaperScissors(hand1, hand2) {
   if (hand1 === hand2) {
