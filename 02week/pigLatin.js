@@ -58,12 +58,12 @@ function splitMe(word, split) {
 
 function pigLatin(word) {
   word = word.toLowerCase();
+  word = word.replace(/ /g, "");
 
   let vowels = ["a", "e", "i", "o", "u"];
   let vowel = "";
 
   let res = checkForFirstVowel(vowels, word);
-  console.log(res);
   var newFilterArray = res.filter(function(number) {
     return number != -1;
   });
@@ -74,8 +74,6 @@ function pigLatin(word) {
   var wordPig = splitMe(word, split);
   return wordPig;
 }
-
-pigLatin("car");
 
 // below is built in
 
