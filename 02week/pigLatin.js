@@ -53,7 +53,9 @@ function innerVowel(res) {
 function splitMe(word, split) {
   let str1 = word.substring(0, split);
   let str2 = word.substring(split);
-  console.log(str2 + str1 + "ay");
+  let tstr = str2 + str1 + "ay";
+  console.log("translation: " + tstr);
+  return tstr;
 }
 
 function pigLatin(word) {
@@ -64,15 +66,20 @@ function pigLatin(word) {
   let vowel = "";
 
   let res = checkForFirstVowel(vowels, word);
-  var newFilterArray = res.filter(function(number) {
-    return number != -1;
-  });
-  console.log("new array " + newFilterArray);
-  let split = Math.min(...newFilterArray);
-  console.log(split);
+  if (typeof res === "object") {
+    let newFilterArray = res.filter(function(number) {
+      return number != -1;
+    });
+    console.log("new array: " + newFilterArray);
+    let split = Math.min(...newFilterArray);
+    console.log("split: " + split);
 
-  var wordPig = splitMe(word, split);
-  return wordPig;
+    let wordPig = splitMe(word, split);
+    return wordPig;
+  } else {
+    let wordPig = res;
+    return wordPig;
+  }
 }
 
 // below is built in
