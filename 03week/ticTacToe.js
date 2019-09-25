@@ -87,15 +87,16 @@ function diagonalWin() {
 
 function checkForWin() {
   if (horizontalWin() == true) {
-    return "horizontal winner!";
+    return true;
   } else if (verticalWin() == true) {
-    return "vertical winner!";
+    return true;
   } else if (diagonalWin() == true) {
-    return "diagonal winner!";
+    return true;
   } else {
     return false;
   }
 }
+checkForWin();
 
 function ticTacToe(row, column) {
   // Your code here
