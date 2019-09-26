@@ -96,10 +96,29 @@ function checkForWin() {
     return false;
   }
 }
-checkForWin();
 
 function ticTacToe(row, column) {
-  // Your code here
+  console.log("playerTurn:", playerTurn);
+  board[parseInt(row)][parseInt(column)] = playerTurn;
+  let win = checkForWin();
+  console.log(win);
+  if (win === true) {
+    return (
+      ("Player", playerTurn, "wins!") &&
+      board == [([" ", " ", " "], [" ", " ", " "], [" ", " ", " "])]
+    );
+  } else {
+    console.log("playerTurn:", playerTurn, typeof playerTurn);
+    if (playerTurn === "X") {
+      let playerTurn = "O";
+      console.log("Switched playerTurn:", playerTurn);
+      return playerTurn;
+    } else if (playerTurn === "O") {
+      let playerTurn = "X";
+      console.log("Switched playerTurn:", playerTurn);
+      return playerTurn;
+    }
+  }
 }
 
 function getPrompt() {
