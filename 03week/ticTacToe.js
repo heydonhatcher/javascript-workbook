@@ -103,20 +103,19 @@ function ticTacToe(row, column) {
   let win = checkForWin();
   console.log(win);
   if (win === true) {
-    return (
-      ("Player", playerTurn, "wins!") &&
-      board == [([" ", " ", " "], [" ", " ", " "], [" ", " ", " "])]
-    );
+    return "Player", playerTurn, "wins!";
+    //empty board?
   } else {
     console.log("playerTurn:", playerTurn, typeof playerTurn);
-    if (playerTurn === "X") {
+    if (playerTurn == "X") {
       let playerTurn = "O";
       console.log("Switched playerTurn:", playerTurn);
       return playerTurn;
-    } else if (playerTurn === "O") {
+    } else if (playerTurn == "O") {
       let playerTurn = "X";
       console.log("Switched playerTurn:", playerTurn);
       return playerTurn;
+      //alternate player code isn't working
     }
   }
 }
