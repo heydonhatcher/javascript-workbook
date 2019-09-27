@@ -60,6 +60,21 @@ if (typeof describe === "function") {
       assert.equal(rockPaperScissors("Paper", "SCISSORS"), "Hand two wins!");
       assert.equal(rockPaperScissors("rock ", "sCiSsOrs"), "Hand one wins!");
     });
+    it("should detect if user uses another word other than rock, paper, and/or scissors", () => {
+      assert.equal(rockPaperScissors("hammer", "rock"), "No one wins!");
+      assert.equal(rockPaperScissors("paper", "sock"), "No one wins!");
+      assert.equal(rockPaperScissors("scissors", "shoe"), "No one wins!");
+    });
+    it("should detect if a player has left their turn empty", () => {
+      assert.equal(rockPaperScissors(" ", "rock"), "Start over");
+      assert.equal(rockPaperScissors("paper", " "), "Start over");
+      assert.equal(rockPaperScissors("scissors", " "), "Start over");
+    });
+    it("should ignore weird punctuation in/before/or after word", () => {
+      assert.equal(rockPaperScissors("ro,ck", "paper"), "Hand two wins!");
+      assert.equal(rockPaperScissors("paper", "sciss.ors"), "Hand two wins!");
+      assert.equal(rockPaperScissors("rock,", "scissors"), "Hand one wins!");
+    });
   });
 } else {
   getPrompt();
