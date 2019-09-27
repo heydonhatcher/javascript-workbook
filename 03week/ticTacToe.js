@@ -98,13 +98,11 @@ function checkForWin() {
 }
 
 function ticTacToe(row, column) {
-  console.log("playerTurn:", playerTurn);
   board[parseInt(row)][parseInt(column)] = playerTurn;
   let win = checkForWin();
-  console.log(win);
   if (win === true) {
-    let emptyBoard = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
-    return "Player", playerTurn, "wins!";
+    console.log("Player", playerTurn, "wins!");
+    board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
   } else if (playerTurn == "X") {
     playerTurn = "O";
   } else {
