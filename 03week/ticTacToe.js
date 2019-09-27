@@ -103,17 +103,12 @@ function ticTacToe(row, column) {
   let win = checkForWin();
   console.log(win);
   if (win === true) {
+    // var emptyBoard = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
     return "Player", playerTurn, "wins!";
-    //empty board?
   } else if (playerTurn == "X") {
-    let playerTurn = "O";
-    console.log("Switched playerTurn:", playerTurn);
-    return playerTurn;
-  } else if (playerTurn == "O") {
-    let playerTurn = "X";
-    console.log("Switched playerTurn:", playerTurn);
-    return playerTurn;
-    //alternate player code isn't working
+    playerTurn = "O";
+  } else if ((playerTurn = "O")) {
+    playerTurn = "X";
   }
 }
 
