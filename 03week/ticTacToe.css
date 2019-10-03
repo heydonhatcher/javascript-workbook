@@ -1,0 +1,48 @@
+#board {
+  margin: auto;
+  width: 900px;
+  height: 900px;
+  align-content: center;
+  background: white;
+}
+
+.one {
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 100px;
+  color: black;
+  text-align: center;
+  padding-top: 10px;
+  width: 250px;
+  height: 250px;
+  float: right;
+  border: 1px black solid;
+}
+
+.one:hover {
+  background-color: lightgreen;
+}
+
+#a,
+#b,
+#c {
+  border-top: white;
+}
+
+#g,
+#h,
+#i {
+  border-bottom: white;
+}
+
+#a,
+#d,
+#g {
+  border-right: white;
+}
+
+#c,
+#f,
+#i {
+  border-left: white;
+}
