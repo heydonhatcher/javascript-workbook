@@ -67,13 +67,13 @@ function isLegal(startStack, endStack) {
 
 function checkForWin(endStack) {
   // Your code here
-  console.log("endStack array:", stacks[endStack]);
+  /* console.log("endStack array:", stacks[endStack]);
   console.log("stacks object:", stacks);
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
   console.log("type of stacks.b:", typeof stacks.b);
-  console.log("Object.values is:", Object.values(stacks));
+  console.log("Object.values is:", Object.values(stacks)); */
   if (stacks.b === [4, 3, 2, 1] || stacks.c === [4, 3, 2, 1]) {
     console.log("YOU ARE A WINNER!");
     return true;
