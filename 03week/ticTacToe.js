@@ -1,15 +1,15 @@
 "use strict";
 
-const assert = require("assert");
+/* const assert = require("assert");
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
-});
+}); */
 let board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]];
 
 let playerTurn = "X";
-
+/* 
 function printBoard() {
   console.log("   0  1  2");
   console.log("0 " + board[0].join(" | "));
@@ -17,7 +17,7 @@ function printBoard() {
   console.log("1 " + board[1].join(" | "));
   console.log("  ---------");
   console.log("2 " + board[2].join(" | "));
-}
+} */
 
 function horizontalWin() {
   if (
