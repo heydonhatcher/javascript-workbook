@@ -67,7 +67,7 @@ function isLegal(startStack, endStack) {
 
 function checkForWin(endStack) {
   // Your code here
-  if (stacks.b === "4, 3, 2, 1" || stacks.c === "4, 3, 2, 1") {
+  if (stacks.b.length == 4 || stacks.c.length == 4) {
     console.log("YOU ARE A WINNER!");
     return true;
   } else {
