@@ -19,11 +19,15 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
+//moves startStack block to endStack
+
 function movePiece(startStack, endStack) {
   let blockToMove = stacks[startStack].pop();
   stacks[endStack].push(blockToMove);
   return stacks;
 }
+
+// this is called below for when the startBlock is greater than endBlock, it pushes the pops back to their original state.
 
 function pushBlocksBack(startStack, startBlock, endStack, endBlock) {
   stacks[startStack].push(startBlock);
@@ -31,8 +35,9 @@ function pushBlocksBack(startStack, startBlock, endStack, endBlock) {
   return;
 }
 
+//this checks legality of move - in all the different ways.
+
 function isLegal(startStack, endStack) {
-  // Your code here
   console.log(startStack, typeof startStack);
   console.log(stacks[startStack]);
   if (
@@ -65,8 +70,9 @@ function isLegal(startStack, endStack) {
   }
 }
 
+//this checks the b or c stack for a winning length (combo) - this works in coordinance with legality to be valid
+
 function checkForWin(endStack) {
-  // Your code here
   if (stacks.b.length == 4 || stacks.c.length == 4) {
     console.log("YOU ARE A WINNER!");
     return true;
@@ -76,6 +82,8 @@ function checkForWin(endStack) {
   }
   return true;
 }
+
+//calls all the prior functions to play the game!
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
