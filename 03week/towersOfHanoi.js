@@ -19,7 +19,8 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-//moves startStack block to endStack
+//Moves startStack block to endStack, by popping the end block storing it in variable blockToMove
+//and pushing it to the endStack, and returning the updated game.
 
 function movePiece(startStack, endStack) {
   let blockToMove = stacks[startStack].pop();
@@ -27,7 +28,8 @@ function movePiece(startStack, endStack) {
   return stacks;
 }
 
-// this is called below for when the startBlock is greater than endBlock, it pushes the pops back to their original state.
+// This is called below for when and if the startBlock is greater than endBlock, it pushes
+// the popped block back to their original state. Since, this is not a legal move.
 
 function pushBlocksBack(startStack, startBlock, endStack, endBlock) {
   stacks[startStack].push(startBlock);
@@ -35,7 +37,13 @@ function pushBlocksBack(startStack, startBlock, endStack, endBlock) {
   return;
 }
 
-//this checks legality of move - in all the different ways.
+//This checks legality of move - in all the different ways. It checks that the input is a valid input
+//[a, b, or c] otherwise, the console.log will return a notification that the move is not legal, and re-
+//print the board. It makes sure that there are blocks at all in the startStack since there needs to be
+//blocks there in order to make a move at all. If the endStack = 0, then the move is legal, then the
+//function allows the move. However, if there is a number in the string, this function then compares
+//the popped startStack block to the popped endStack block. If the endStack block is larger, the movePiece
+//function is called; however, if vice versa, the function calls pushBlocksBack since the move is illegal.
 
 function isLegal(startStack, endStack) {
   console.log(startStack, typeof startStack);
@@ -70,7 +78,9 @@ function isLegal(startStack, endStack) {
   }
 }
 
-//this checks the b or c stack for a winning length (combo) - this works in coordinance with legality to be valid
+//This checks the b or c stack for a winning length of 4. This works in coordinance with legality to
+//be valid... or in other words, because of all the previous coding on legal moves, etc, just checking
+//the length on the array on b or c should be enough to checkForWin.
 
 function checkForWin(endStack) {
   if (stacks.b.length == 4 || stacks.c.length == 4) {
@@ -83,7 +93,7 @@ function checkForWin(endStack) {
   return true;
 }
 
-//calls all the prior functions to play the game!
+//This calls all the prior functions to play the game!
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
