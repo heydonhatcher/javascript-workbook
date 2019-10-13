@@ -74,6 +74,9 @@ class Board {
         console.log("checker:", checker);
       }
     };
+    this.selectChecker = function(row, column) {
+      return this.grid[row][column];
+    };
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -117,7 +120,19 @@ class Board {
 class Game {
   constructor() {
     this.board = new Board();
-    this.moveChecker = function() {};
+    //getting user input into a form we can use
+    this.moveChecker = function(start, end) {
+      let startArray = start.split("");
+      let startRow = parseInt(startArray[0]);
+      let startColumn = parseInt(startArray[1]);
+      let endArray = end.split("");
+      let endRow = parseInt(endArray[0]);
+      let endColumn = parseInt(endArray[1]);
+      let checker = this.board.selectChecker(startRow, startColumn);
+      //moving piece to endRow and endColumn
+      this.board.grid[startRow][startColumn] = null;
+      this.board.grid[endRow][endColumn] = checker;
+    };
   }
   start() {
     this.board.createGrid();
