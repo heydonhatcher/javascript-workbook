@@ -12,16 +12,29 @@ let jobTypes = {
 //my work
 class CrewMember {
   constructor(name, job, specialSkill) {
-    (this.name = name), (this.job = job), (this.specialSkill = specialSkill);
+    (this.name = name),
+      (this.job = job),
+      (this.specialSkill = specialSkill),
+      (this.enterShip = function(ship) {
+        this.ship = ship;
+        ship.crew.push(this);
+      });
   }
 }
 
 class Ship {
-  constructor(name, type, ability, crew) {
+  constructor(name, type, ability) {
     (this.name = name),
       (this.type = type),
       (this.ability = ability),
-      (this.crew = []);
+      (this.crew = []),
+      (this.missionStatement = function() {
+        if (this.crew.length == 0) {
+          return "Can't perform a mission yet.";
+        } else {
+          return this.ability;
+        }
+      });
   }
 }
 
