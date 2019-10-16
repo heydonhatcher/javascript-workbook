@@ -12,6 +12,7 @@ const rl = readline.createInterface({
 //make piece legal, valid
 //piece captured, remove piece that got captured
 
+//creates different checkers
 class Checker {
   constructor(color) {
     this.color = color;
@@ -23,6 +24,7 @@ class Checker {
   }
 }
 
+//puts checkers on the board
 class Board {
   constructor() {
     this.grid = [];
@@ -56,6 +58,7 @@ class Board {
         [7, 4],
         [7, 6]
       ];
+      //gets the white and black checkers to show up in the console log grid
       for (let i = 0; i < 12; i++) {
         let checker = new Checker("white");
         checker.position = whitePositions[i];
