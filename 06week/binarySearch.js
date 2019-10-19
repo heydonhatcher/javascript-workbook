@@ -1001,24 +1001,31 @@ var sortedArray = [
   "yourself"
 ];
 
-// my naieve implementation.
-function find(haystack, needle) {
-  //code here
-  for (var i = 0; i < haystack.length; i++) {
-    var currentWord = haystack[i];
-    if (currentWord == needle) {
-      return i;
-    }
-  }
-  return -1;
-}
+// my naive implementation.
+// function find(haystack, needle) {
+//   for (var i = 0; i < haystack.length; i++) {
+//     var currentWord = haystack[i];
+//     if (currentWord == needle) {
+//       return i;
+//     }
+//   }
+//   return -1;
+//}
 
 // implement a function that will
-// execute a binaray search on the array
+// execute a binary search on the array
 // to find the needle
-function betterFind(haystack, needle) {
-  // your code here
+function betterFind(haystack, needle, start, end) {
+  let mid = Math.floor((start + end) / 2);
+  if (haystack[mid] === needle) {
+    return `You found it! The needle is ${needle}`;
+  }
+  if (haystack[mid] > needle) {
+    return betterFind(haystack, needle, start, mid - 1);
+  } else {
+    return betterFind(haystack, needle, mid + 1, end);
+  }
 }
 
 // call your method
-console.log(find(sortedArray, "ahead"));
+console.log(betterFind(sortedArray, "ahead", 0, sortedArray.length - 1));
