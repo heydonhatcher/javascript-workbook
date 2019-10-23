@@ -7,25 +7,28 @@ function rampNumberCount(number) {
     for (var i = 0, len = sNumber.length; i < len; i++) {
       output.push(sNumber[i]);
     }
+    console.log("---------------\n", "output:", output);
 
-    console.log("output:", output);
-    var rampCount = 0;
-    for (var i = 0; i < output.length; i++) {
-      if (output[i] > output[i + 1]) {
-        console.log("Not a ramp number");
-      } else if (output[i] === output[i + 1]) {
-        console.log("currentHighest same as next digit, no change");
-      } else if (output[i] < output[i + 1]) {
-        currentHighest = output[i + 1];
-        console.log("new currentHighest is", currentHighest);
-        // var currentHighest = output[i];
-        // console.log("currentHighest:", currentHighest);
-      } else {
+    for (var i = 1; i <= output.length; i++) {
+      if (output.length === 1) {
         rampCount++;
+        console.log("Is ramp number: only one digit");
+        console.log("(changed) current rampCount:", rampCount);
+        break;
+      } else if (output[i - 1] > output[i]) {
+        console.log("Not a ramp number");
+        console.log("(unchanged) current rampCount:", rampCount);
+        break;
+      } else if (output[i - 1] === output[1] || output[i - 1] < output[i]) {
+        if (i + 1 === output.length) {
+          rampCount++;
+          console.log("Is a ramp number");
+          console.log("(changed) current rampCount:", rampCount);
+        }
       }
-      console.log("current rampCount:", rampCount);
     }
   }
   console.log("ramp numbers less than", number, ":", rampCount);
 }
-rampNumberCount(2567);
+
+rampNumberCount(100);
