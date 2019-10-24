@@ -55,14 +55,55 @@ const blueTeam = [];
 const redTeam = [];
 
 class player {
-  constructor() {}
+  constructor(
+    person,
+    canThrowBall,
+    canDodgeBall,
+    hasPaid,
+    isHealthy,
+    yearsExperience
+  ) {
+    console.log("person:", person);
+    console.log(Object.entries(person));
+    for (var [key, value] of Object.entries(person)) {
+      console.log("key", key, "value", value);
+      this[key] = value;
+    }
+    this.canThrowBall = canThrowBall;
+    this.canDodgeBall = canDodgeBall;
+    this.hasPaid = hasPaid;
+    this.isHealthy = isHealthy;
+    this.yearsExperience = yearsExperience;
+  }
 }
 class blueTeammate {
-  constructor() {}
+  constructor(person) {
+    for (var [key, value] of Object.entries(person)) {
+      console.log("key", key, "value", value);
+      this[key] = value;
+    }
+    this.teamColor = "blue";
+    this.mascot = "rattlin' rattlesnakes";
+  }
 }
 class redTeammate {
-  constructor() {}
+  constructor(person) {
+    for (var [key, value] of Object.entries(person)) {
+      console.log("key", key, "value", value);
+      this[key] = value;
+    }
+    this.teamColor = "red";
+    this.mascot = "ole man opossums";
+  }
 }
+
+const addPlayerToTeam = (person, color) => {
+  if (color === "blue") {
+    let bluePlayer = new blueTeammate(person);
+  } else if (color === "red") {
+    let redPlayer = new redTeammate(person);
+  }
+};
 
 const listPeopleChoices = () => {
   const listElement = document.getElementById("people");
@@ -71,7 +112,7 @@ const listPeopleChoices = () => {
     const button = document.createElement("button");
     button.innerHTML = "Make Player";
     button.addEventListener("click", function() {
-      makePlayer(person.id);
+      makePlayer(person);
     });
     li.appendChild(button);
     li.appendChild(
@@ -81,6 +122,41 @@ const listPeopleChoices = () => {
   });
 };
 
-const makePlayer = id => {
-  console.log(`li ${id} was clicked!`);
+const listPlayerChoices = () => {
+  const listElement = document.getElementById("players");
+  listOfPlayers.map(player => {
+    const li = document.createElement("li");
+    const buttonOne = document.createElement("button");
+    const buttonTwo = document.createElement("button");
+    buttonOne.innerHTML = "Blue Team";
+    buttonTwo.innerHTML = "Red Team";
+    buttonOne.addEventListener("click", function() {
+      addPlayerToTeam(player, "blue");
+    });
+    li.appendChild(button);
+    li.appendChild(
+      document.createTextNode(player.name + " - " + player.teamColor)
+    );
+    listElement.append(li);
+    buttonTwo.addEventListener("click", function() {
+      addPlayerToTeam(player, "red");
+    });
+    li.appendChild(button);
+    li.appendChild(
+      document.createTextNode(player.name + " - " + player.teamColor)
+    );
+    listElement.append(li);
+  });
+};
+
+const makePlayer = person => {
+  //console.log(`li ${person.id} was clicked!`);
+  let _player = new player(person, 1, 1, 1, 1, 1);
+  //console.log(arrOfPeople.indexOf(person));
+  let poppedPlayer = arrOfPeople.splice(arrOfPeople.indexOf(person), 1);
+  //console.log("poppedPlayer:", poppedPlayer);
+  console.log("arrOfPeople:", arrOfPeople);
+  listOfPlayers.push(_player);
+  //console.log("final player object:", _player);
+  console.log("listOfPlayers:", listOfPlayers);
 };
