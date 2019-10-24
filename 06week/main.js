@@ -124,29 +124,46 @@ const listPeopleChoices = () => {
 
 const listPlayerChoices = () => {
   const listElement = document.getElementById("players");
-  listOfPlayers.map(player => {
+  listOfPlayers.forEach(person => {
     const li = document.createElement("li");
     const buttonOne = document.createElement("button");
     const buttonTwo = document.createElement("button");
     buttonOne.innerHTML = "Blue Team";
     buttonTwo.innerHTML = "Red Team";
     buttonOne.addEventListener("click", function() {
-      addPlayerToTeam(player, "blue");
+      addPlayerToTeam(person, "blue");
     });
-    li.appendChild(button);
+    li.appendChild(buttonOne);
+    li.appendChild(buttonTwo);
     li.appendChild(
-      document.createTextNode(player.name + " - " + player.teamColor)
-    );
-    listElement.append(li);
-    buttonTwo.addEventListener("click", function() {
-      addPlayerToTeam(player, "red");
-    });
-    li.appendChild(button);
-    li.appendChild(
-      document.createTextNode(player.name + " - " + player.teamColor)
+      document.createTextNode(person.name + " - " + person.skillSet)
     );
     listElement.append(li);
   });
+  // const listElement = document.getElementById("players");
+  // listOfPlayers.map(player => {
+  //   const li = document.createElement("li");
+  //   const buttonOne = document.createElement("button");
+  //   const buttonTwo = document.createElement("button");
+  //   buttonOne.innerHTML = "Blue Team";
+  //   buttonTwo.innerHTML = "Red Team";
+  //   buttonOne.addEventListener("click", function() {
+  //     addPlayerToTeam(player, "blue");
+  //   });
+  //   li.appendChild(button);
+  //   li.appendChild(
+  //     document.createTextNode(player.name + " - " + player.teamColor)
+  //   );
+  //   listElement.append(li);
+  //   buttonTwo.addEventListener("click", function() {
+  //     addPlayerToTeam(player, "red");
+  //   });
+  //   li.appendChild(button);
+  //   li.appendChild(
+  //     document.createTextNode(player.name + " - " + player.teamColor)
+  //   );
+  //   listElement.append(li);
+  // });
 };
 
 const makePlayer = person => {
@@ -159,4 +176,6 @@ const makePlayer = person => {
   listOfPlayers.push(_player);
   //console.log("final player object:", _player);
   console.log("listOfPlayers:", listOfPlayers);
+
+  listPeopleChoices();
 };
