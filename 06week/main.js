@@ -100,9 +100,14 @@ class redTeammate {
 const addPlayerToTeam = (person, color) => {
   if (color === "blue") {
     let bluePlayer = new blueTeammate(person);
+    console.log("bluePlayer:", bluePlayer);
+    blueTeam.push(bluePlayer);
   } else if (color === "red") {
     let redPlayer = new redTeammate(person);
+    console.log("redPlayer:", redPlayer);
+    redTeam.push(redPlayer);
   }
+  console.log("blueTeam:", blueTeam, "- redTeam:", redTeam);
 };
 
 const listPeopleChoices = () => {
@@ -139,6 +144,15 @@ const listPlayerChoices = () => {
       document.createTextNode(person.name + " - " + person.skillSet)
     );
     listElement.append(li);
+    buttonTwo.addEventListener("click", function() {
+      addPlayerToTeam(person, "red");
+    });
+    li.appendChild(buttonOne);
+    li.appendChild(buttonTwo);
+    // li.appendChild(
+    //   document.createTextNode(person.name + " - " + person.skillSet)
+    //);
+    listElement.append(li);
   });
 };
 
@@ -152,6 +166,4 @@ const makePlayer = person => {
   listOfPlayers.push(_player);
   //console.log("final player object:", _player);
   console.log("listOfPlayers:", listOfPlayers);
-  li.removeChild(poppedPlayer);
-  //listPeopleChoices();
 };
