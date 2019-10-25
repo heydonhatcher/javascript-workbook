@@ -114,6 +114,7 @@ const listPeopleChoices = () => {
   const listElement = document.getElementById("people");
   arrOfPeople.forEach(person => {
     const li = document.createElement("li");
+    li.setAttribute("id", person.id);
     const button = document.createElement("button");
     button.innerHTML = "Make Player";
     button.addEventListener("click", function() {
@@ -125,6 +126,8 @@ const listPeopleChoices = () => {
     );
     listElement.append(li);
   });
+  var element = document.getElementById("people");
+  element.parentNode.removeChild();
 };
 
 const listPlayerChoices = () => {
