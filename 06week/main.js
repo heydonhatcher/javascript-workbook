@@ -126,8 +126,10 @@ const listPeopleChoices = () => {
     );
     listElement.append(li);
   });
-  var element = document.getElementById("people");
-  element.parentNode.removeChild();
+  var clickedButton = event.target;
+  console.log("event target:", clickedButton);
+  var clickedDiv = clickedButton.parentElement;
+  clickedDiv.removeChild(clickedButton);
 };
 
 const listPlayerChoices = () => {
@@ -152,21 +154,26 @@ const listPlayerChoices = () => {
     });
     li.appendChild(buttonOne);
     li.appendChild(buttonTwo);
-    // li.appendChild(
-    //   document.createTextNode(person.name + " - " + person.skillSet)
-    //);
     listElement.append(li);
   });
 };
 
 const makePlayer = person => {
-  //console.log(`li ${person.id} was clicked!`);
+  console.log(`li ${person.id} was clicked!`);
   let _player = new player(person, 1, 1, 1, 1, 1);
-  //console.log(arrOfPeople.indexOf(person));
+  console.log(arrOfPeople.indexOf(person));
   let poppedPlayer = arrOfPeople.splice(arrOfPeople.indexOf(person), 1);
-  //console.log("poppedPlayer:", poppedPlayer);
+  console.log("poppedPlayer:", poppedPlayer);
   console.log("arrOfPeople:", arrOfPeople);
   listOfPlayers.push(_player);
-  //console.log("final player object:", _player);
+  console.log("final player object:", _player);
   console.log("listOfPlayers:", listOfPlayers);
+  var clickedButton = event.target;
+  console.log("event target:", clickedButton);
+  var clickedDiv = clickedButton.parentElement;
+  var newList = clickedDiv.parentElement;
+  console.log("newList:", newList);
+  clickedDiv.removeChild(clickedButton);
+  newList.removeChild(clickedDiv);
+  listPlayerChoices();
 };
