@@ -102,12 +102,38 @@ const addPlayerToTeam = (person, color) => {
     let bluePlayer = new blueTeammate(person);
     console.log("bluePlayer:", bluePlayer);
     blueTeam.push(bluePlayer);
+    listTeamMembers("blue", blueTeam);
   } else if (color === "red") {
     let redPlayer = new redTeammate(person);
     console.log("redPlayer:", redPlayer);
     redTeam.push(redPlayer);
+    listTeamMembers("red", redTeam);
   }
   console.log("blueTeam:", blueTeam, "- redTeam:", redTeam);
+};
+
+const listTeamMembers = (color, team) => {
+  const teamElement = document.getElementById(color);
+  while (teamElement.firstChild) {
+    teamElement.removeChild(teamElement.firstChild);
+  }
+  team.forEach(player => {
+    const li = document.createElement("li");
+    li.setAttribute("id", player.id);
+    li.appendChild(
+      document.createTextNode(player.name + " - " + player.skillSet)
+    );
+    teamElement.append(li);
+  });
+  listOfPlayers.splice(listOfPlayers.indexOf(player), 1);
+
+  var clickedButton = event.target;
+  console.log("event target:", clickedButton);
+  var clickedDiv = clickedButton.parentElement;
+  var newList = clickedDiv.parentElement;
+  console.log("newList:", newList);
+  clickedDiv.removeChild(clickedButton);
+  newList.removeChild(clickedDiv);
 };
 
 const listPeopleChoices = () => {
@@ -176,4 +202,22 @@ const makePlayer = person => {
   clickedDiv.removeChild(clickedButton);
   newList.removeChild(clickedDiv);
   listPlayerChoices();
+  return newList;
 };
+
+// if (typeof describe === "function") {
+//   describe("#makePlayer()", () => {
+//     it("should turn person into player", () => {
+//       assert.equal(makePlayer(arrOfPeople[0]).length, arrOfPeople.length - 1);
+//       //assert.equal(makePlayer("dog"), "ogday");
+//     });
+//     it("should translate a complex word", () => {
+//       assert.equal(pigLatin("create"), "eatecray");
+//       assert.equal(pigLatin("valley"), "alleyvay");
+//     });
+//     it('should attach "yay" if word begins with vowel', () => {
+//       assert.equal(pigLatin("egg"), "eggyay");
+//       assert.equal(pigLatin("emission"), "emissionyay");
+//     });
+//   });
+// }
