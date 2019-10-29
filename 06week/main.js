@@ -176,7 +176,8 @@ const listPlayerChoices = () => {
   while (playersElement.firstChild) {
     playersElement.removeChild(playersElement.firstChild);
   }
-  // loops through
+  // loops through listOfPlayers and creates an li element with two buttons that ultimately decide
+  // upon being clicked which team they will go to, either "blue" or "red"
   listOfPlayers.forEach(person => {
     const li = document.createElement("li");
     const buttonOne = document.createElement("button");
@@ -186,6 +187,8 @@ const listPlayerChoices = () => {
     buttonOne.addEventListener("click", function() {
       addPlayerToTeam(person, "blue");
     });
+    // this adds the previously created li element and buttons to the "players"
+    // ul in the DOM
     li.appendChild(buttonOne);
     li.appendChild(buttonTwo);
     li.appendChild(
@@ -201,20 +204,27 @@ const listPlayerChoices = () => {
   });
 };
 
+// this function adds player to specific team, "blue" or "red"
 const addPlayerToTeam = (player, color, browser = true) => {
   if (color === "blue") {
+    // instantiates a new blueTeammate player object
     let bluePlayer = new blueTeammate(player);
-    console.log("bluePlayer:", bluePlayer);
-    console.log("bluePlayer.teamColor", bluePlayer.teamColor);
+    // pushes blueTeammate object into the blueTeam array
     blueTeam.push(bluePlayer);
+    // if occurring on the browser, calls the listTeamMembers() function and
+    // updates the list
     if (browser) {
       listTeamMembers("blue", blueTeam);
     }
     return bluePlayer;
+    // otherwise, if the player is "red"
   } else if (color === "red") {
+    // instantiates a new redTeammate player object
     let redPlayer = new redTeammate(player);
-    console.log("redPlayer:", redPlayer);
+    // pushes redTeammate object into redTeam array
     redTeam.push(redPlayer);
+    // if occurring on the browser, calls the listTeamMembers() function and
+    // updates the list
     if (browser) {
       listTeamMembers("red", redTeam);
     }
@@ -223,11 +233,15 @@ const addPlayerToTeam = (player, color, browser = true) => {
   console.log("blueTeam:", blueTeam, "- redTeam:", redTeam);
 };
 
+// function that lists the "blue" or "red" players
+// in the correct and corresponding areas of the DOM
 const listTeamMembers = (color, team) => {
   const teamElement = document.getElementById(color);
+  // ensures that list is not redundantly displayed in the DOM
   while (teamElement.firstChild) {
     teamElement.removeChild(teamElement.firstChild);
   }
+  // loops through the team and for each player creates a li element in the DOM
   team.forEach(player => {
     const li = document.createElement("li");
     li.setAttribute("id", player.id);
@@ -236,17 +250,19 @@ const listTeamMembers = (color, team) => {
     );
     teamElement.append(li);
   });
+  // removes player from listOfPlayers
   listOfPlayers.splice(listOfPlayers.indexOf(player), 1);
-
+  // sets clickedButton to the clicked button
   var clickedButton = event.target;
-  //console.log("event target:", clickedButton);
+  // sets clickedDiv to the parent element of clickedButton
   var clickedDiv = clickedButton.parentElement;
+  // sets newList to the parent element of clickedDiv
   var newList = clickedDiv.parentElement;
-  //console.log("newList:", newList);
-  clickedDiv.removeChild(clickedButton);
+  // removes clickedDiv from newList
   newList.removeChild(clickedDiv);
 };
 
+// tests
 if (typeof describe === "function") {
   describe("#addPlayerToTeam()", () => {
     it("should instantiate player object from element of arrOfPeople", () => {
