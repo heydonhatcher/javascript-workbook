@@ -1,0 +1,39 @@
+body {
+  background: lightblue;
+  font-family: "Cardo", serif;
+  align-content: center;
+  color: darkblue;
+}
+
+h4 {
+  font-size: 30pt;
+  text-align: center;
+  border: 3px solid darkblue;
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10px;
+  padding: 10px;
+}
+
+li {
+  float: left;
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
+}
+
+span {
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button {
+  font-family: "cardo", serif;
+  font-size: 12pt;
+  margin-left: 20px;
+  margin-right: 20px;
+}
