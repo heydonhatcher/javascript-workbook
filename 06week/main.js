@@ -1,5 +1,6 @@
 //const assert = require("assert");
 
+// defines constant array of person objects
 const arrOfPeople = [
   {
     id: 2,
@@ -52,11 +53,14 @@ const arrOfPeople = [
   }
 ];
 
+// empty arrays waiting to be filled
 const listOfPlayers = [];
 const blueTeam = [];
 const redTeam = [];
 
+// constructs the player object
 class player {
+  // constructor takes the following args
   constructor(
     person,
     canThrowBall,
@@ -65,12 +69,13 @@ class player {
     isHealthy,
     yearsExperience
   ) {
-    console.log("person:", person);
-    console.log(Object.entries(person));
+    // for loop that loops through the pre-existing key value pairs and adds them as attributes
+    // to the resulting player object
     for (var [key, value] of Object.entries(person)) {
       console.log("key", key, "value", value);
       this[key] = value;
     }
+    // sets additional attributes on the resulting player object
     this.canThrowBall = canThrowBall;
     this.canDodgeBall = canDodgeBall;
     this.hasPaid = hasPaid;
@@ -78,26 +83,123 @@ class player {
     this.yearsExperience = yearsExperience;
   }
 }
+
+// constructs the blueTeammate object
 class blueTeammate {
+  // for loop that loops through the pre-existing key value pairs and adds them as attributes
+  // to the resulting blueTeammate object
   constructor(person) {
     for (var [key, value] of Object.entries(person)) {
-      //console.log("key", key, "value", value);
       this[key] = value;
     }
+    // sets additional attributes on the resulting blueTeammate object
     this.teamColor = "blue";
     this.mascot = "rattlin rattlesnakes";
   }
 }
+
+// constructs the redTeammate object
 class redTeammate {
+  // for loop that loops through the pre-existing key value pairs and adds them as attributes
+  // to the resulting redTeammate object
   constructor(person) {
     for (var [key, value] of Object.entries(person)) {
-      //console.log("key", key, "value", value);
       this[key] = value;
     }
+    // sets additional attributes on the resulting redTeammate object
     this.teamColor = "red";
     this.mascot = "ole man opossums";
   }
 }
+
+// this function lists the array of person objects in arrOfPeople
+const listPeopleChoices = () => {
+  const listElement = document.getElementById("people");
+  // iterates through arrOfPeople and adds each person li tags
+  arrOfPeople.forEach(person => {
+    const li = document.createElement("li");
+    li.setAttribute("id", person.id);
+    // creates a "Make Player" button
+    const button = document.createElement("button");
+    button.innerHTML = "Make Player";
+    // creates an event listener for the "Make Player" button
+    button.addEventListener("click", function() {
+      // this calls the makePlayer() function
+      makePlayer(person);
+    });
+    // adds the button to the DOM - li element
+    li.appendChild(button);
+    // adds the player information to the li element
+    li.appendChild(
+      document.createTextNode(person.name + " - " + person.skillSet)
+    );
+    // appending li element to the "people" ul in DOM
+    listElement.append(li);
+  });
+  // assigns clicked variable to the event.target
+  var clickedButton = event.target;
+  // gets the parent of clickedButton
+  var clickedDiv = clickedButton.parentElement;
+  // removes the button upon click
+  clickedDiv.removeChild(clickedButton);
+};
+
+// this function takes a person object and instantiates a player object from the person
+const makePlayer = (person, browser = true) => {
+  // instantiates new player object
+  let _player = new player(person, 1, 1, 1, 1, 1);
+  // removes person from arrOfPeople
+  arrOfPeople.splice(arrOfPeople.indexOf(person), 1);
+  // pushes person to listOfPlayers
+  listOfPlayers.push(_player);
+  // if in the browser, hit this code block
+  if (browser) {
+    // sets clickedButton to the clicked button
+    var clickedButton = event.target;
+    // sets clickedDiv to the parent element of clickedButton
+    var clickedDiv = clickedButton.parentElement;
+    // sets newList to the parent element of clickedDiv
+    var newList = clickedDiv.parentElement;
+    // removes clickedDiv from newList
+    newList.removeChild(clickedDiv);
+    // calls listPlayerChoices() which will be aware of the newList
+    listPlayerChoices();
+  }
+  // returns the new player object
+  return _player;
+};
+
+// this function lists the players eligible to be added to a team
+const listPlayerChoices = () => {
+  const playersElement = document.getElementById("players");
+  // ensures that list is not redundantly displayed in the DOM
+  while (playersElement.firstChild) {
+    playersElement.removeChild(playersElement.firstChild);
+  }
+  // loops through
+  listOfPlayers.forEach(person => {
+    const li = document.createElement("li");
+    const buttonOne = document.createElement("button");
+    const buttonTwo = document.createElement("button");
+    buttonOne.innerHTML = "Blue Team";
+    buttonTwo.innerHTML = "Red Team";
+    buttonOne.addEventListener("click", function() {
+      addPlayerToTeam(person, "blue");
+    });
+    li.appendChild(buttonOne);
+    li.appendChild(buttonTwo);
+    li.appendChild(
+      document.createTextNode(person.name + " - " + person.skillSet)
+    );
+    playersElement.append(li);
+    buttonTwo.addEventListener("click", function() {
+      addPlayerToTeam(person, "red");
+    });
+    li.appendChild(buttonOne);
+    li.appendChild(buttonTwo);
+    playersElement.append(li);
+  });
+};
 
 const addPlayerToTeam = (player, color, browser = true) => {
   if (color === "blue") {
@@ -143,81 +245,6 @@ const listTeamMembers = (color, team) => {
   //console.log("newList:", newList);
   clickedDiv.removeChild(clickedButton);
   newList.removeChild(clickedDiv);
-};
-
-const listPeopleChoices = () => {
-  const listElement = document.getElementById("people");
-  arrOfPeople.forEach(person => {
-    const li = document.createElement("li");
-    li.setAttribute("id", person.id);
-    const button = document.createElement("button");
-    button.innerHTML = "Make Player";
-    button.addEventListener("click", function() {
-      makePlayer(person);
-    });
-    li.appendChild(button);
-    li.appendChild(
-      document.createTextNode(person.name + " - " + person.skillSet)
-    );
-    listElement.append(li);
-  });
-  var clickedButton = event.target;
-  console.log("event target:", clickedButton);
-  var clickedDiv = clickedButton.parentElement;
-  clickedDiv.removeChild(clickedButton);
-};
-
-const listPlayerChoices = () => {
-  const playersElement = document.getElementById("players");
-  while (playersElement.firstChild) {
-    playersElement.removeChild(playersElement.firstChild);
-  }
-  listOfPlayers.forEach(person => {
-    const li = document.createElement("li");
-    const buttonOne = document.createElement("button");
-    const buttonTwo = document.createElement("button");
-    buttonOne.innerHTML = "Blue Team";
-    buttonTwo.innerHTML = "Red Team";
-    buttonOne.addEventListener("click", function() {
-      addPlayerToTeam(person, "blue");
-    });
-    li.appendChild(buttonOne);
-    li.appendChild(buttonTwo);
-    li.appendChild(
-      document.createTextNode(person.name + " - " + person.skillSet)
-    );
-    playersElement.append(li);
-    buttonTwo.addEventListener("click", function() {
-      addPlayerToTeam(person, "red");
-    });
-    li.appendChild(buttonOne);
-    li.appendChild(buttonTwo);
-    playersElement.append(li);
-  });
-};
-
-const makePlayer = (person, browser = true) => {
-  //console.log(`li ${person.id} was clicked!`);
-  let _player = new player(person, 1, 1, 1, 1, 1);
-  //console.log(arrOfPeople.indexOf(person));
-  let poppedPlayer = arrOfPeople.splice(arrOfPeople.indexOf(person), 1);
-  //console.log("poppedPlayer:", poppedPlayer);
-  //console.log("arrOfPeople:", arrOfPeople);
-  listOfPlayers.push(_player);
-  //console.log("final player object:", _player);
-  //console.log("listOfPlayers:", listOfPlayers);
-  if (browser) {
-    var clickedButton = event.target;
-    //console.log("event target:", clickedButton);
-    var clickedDiv = clickedButton.parentElement;
-    var newList = clickedDiv.parentElement;
-    //console.log("newList:", newList);
-    clickedDiv.removeChild(clickedButton);
-    newList.removeChild(clickedDiv);
-    listPlayerChoices();
-  }
-  //return newList;
-  return _player;
 };
 
 if (typeof describe === "function") {
